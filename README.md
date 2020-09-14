@@ -42,18 +42,18 @@ The development server auto-refreshes whenever you save changes to any of the pa
 
 # Creating Posts
 
-With our basic site create, we're going to setup the folder for our posts and create some sample posts. From the root folder of the project, create three post folders and the Markdown document for each post. Here is the Powershell code I used to do that.
+With our basic site created, we're going to setup the folder for our posts and create some sample posts. From the root folder of the project, create three post folders and the Markdown document for each post. Here is the Powershell code I used to do that.
 
 ```powershell
 @("2020-09-01-first-post", "2020-09-05-second-post", "2020-09-10-third-post") | ForEach-Object {
-		mkdir src/posts/2020/$_
+    mkdir src/posts/2020/$_
 }
 
 cd src/posts/2020
 
 Get-ChildItem -Directory | ForEach-Object {
-		cd $_.FullName
-		New-Item index.mdx
+    cd $_.FullName
+    New-Item index.mdx
 }
 ```
 
@@ -189,7 +189,7 @@ module.exports = {
         title: `Gatsby Markdown Blog`,
         description: `Learn how to make a blog with Gatsby and Markdown posts.`,
     },
-		...
+        ...
 }
 ```
 
@@ -229,7 +229,7 @@ export const query = graphql
     query HomePageQuery {
         site {
             siteMetadata {
-								title
+                                title
                 description
             }
         }
@@ -239,7 +239,7 @@ export const query = graphql
 const HomePage = ({ data }) => {
     return (
         <div>
-						<h1>{data.site.siteMetadata.title}</h1>
+                        <h1>{data.site.siteMetadata.title}</h1>
             <p>{data.site.siteMetadata.description}</p>
         </div>
     )
