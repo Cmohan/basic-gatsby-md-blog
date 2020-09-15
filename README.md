@@ -630,7 +630,7 @@ Save this file and then restart the development server. You should now be able t
 
 ![Post Page - Third Post](/screenshots/18.png)
 
-**Congratulations! You made a blog using Gatsby and Markdown posts!**
+## **Congratulations! You made a blog using Gatsby and Markdown posts!**
 
 # Next Steps
 
@@ -649,3 +649,5 @@ Gatsby also offers their own hosting option called [Gatsby Cloud](https://www.ga
 ## Add Features
 
 Some ideas are adding Prev/Next navigation to the posts, displaying code blocks with synax highlighting, giving your posts cover photos, or creating an SEO component to attach to all your pages.
+
+## **This article and the codefiles for it can be found [in this Github repo](https://github.com/Cmohan/basic-gatsby-md-blog).**
