@@ -1,7 +1,5 @@
 # Build a Basic Gatsby Blog with Markdown Posts
 
----
-
 If you aren't familiar with it (I hadn't heard of it before 2020), [Gatsby](https://www.gatsbyjs.com/) is a static site generator that allows for the use of React components, plugins, and an internal GraphQL API to create sites that are interactive, run fast, and are quick to build.
 
 NOTE: This tutorial requires NodeJS and npm. I'm using Powershell 7 as my command prompt but use whatever you feel comfortable with.
@@ -14,7 +12,7 @@ If you haven't worked with Gatsby before, you'll need to install the Gatsby CLI 
 npm install -g gatsby-cli
 ```
 
-Fastest way to get going, that I've found, is to use one of the project templates that Gatsby offers. You can find them all or submit your own at [gatsby.dev/starters](http://gatsby.dev/starters). However, the default Gatsby template that is used when you don't specify a particular template is actually quite complete and that can be a bit overwhelming if you haven't used Gatsby before. I'll be using their Hello World template for this tutorial since it creates less files and folders than the default template.
+I've found that the fastest way to get going is to use one of the project templates that Gatsby offers. You can find them all or submit your own at [gatsby.dev/starters](http://gatsby.dev/starters). However, the default Gatsby template that is used when you don't specify a particular template is actually quite complete and that can be a bit overwhelming if you haven't used Gatsby before. I'll be using their Hello World template for this tutorial since it creates less files and folders than the default template.
 
 To make a new Gatsby site, navigate to the directory you want to store you project in and run the `new` command:
 
@@ -168,14 +166,14 @@ Enter the following query in the editor to see all of the posts we created and t
 
 ```graphql
 {
-  allMdx {
-    nodes {
-      frontmatter {
-        title
-        date
-      }
+    allMdx {
+        nodes {
+            frontmatter {
+                title
+                date
+            }
+        }
     }
-  }
 }
 ```
 
@@ -197,12 +195,12 @@ You can see that data in the GraphQL explorer too with this query
 
 ```graphql
 {
-  site {
-    siteMetadata {
-      title
-      description
+    site {
+        siteMetadata {
+            title
+            description
+        }
     }
-  }
 }
 ```
 
@@ -229,7 +227,7 @@ export const query = graphql
     query HomePageQuery {
         site {
             siteMetadata {
-                                title
+                title
                 description
             }
         }
@@ -239,7 +237,7 @@ export const query = graphql
 const HomePage = ({ data }) => {
     return (
         <div>
-                        <h1>{data.site.siteMetadata.title}</h1>
+            <h1>{data.site.siteMetadata.title}</h1>
             <p>{data.site.siteMetadata.description}</p>
         </div>
     )
@@ -341,8 +339,8 @@ export const query = graphql
                 id
                 excerpt(pruneLength: 250)
                 frontmatter {
-                title
-                date
+                    title
+                    date
                 }
             }
         }
@@ -385,7 +383,7 @@ We also updated the page's html code to display the list of posts. If you aren't
 
 # Creating Links to Posts
 
-Gatsby has a handy tool called Node API that can help make the URLs for the post pages if we don't want to specify them in the metadata of the posts. These URLs are called slugs and once they're create, we can pull them with an API query to create links on the homepage. This tool will be run through a file called `gatsby-node.js`. It's not included in the Hello World template so you'll need to create it in the root folder of the project, like our `gatsby-config.js` file
+Gatsby has a handy tool called Node API that can help make the URLs for the post pages if we don't want to specify them in the metadata of the posts. These URLs are called slugs and once they're created, we can pull them with an API query to create links on the homepage. This tool will be run through a file called `gatsby-node.js`. It's not included in the Hello World template so you'll need to create it in the root folder of the project, like our `gatsby-config.js` file
 
 ![Folder Structure with new gatsby-node file](/screenshots/12.png)
 
@@ -419,23 +417,26 @@ export const query = graphql
     query SITE_INDEX_QUERY {
         site {
             siteMetadata {
-              title
-              description
+               title
+               description
             }
-          }
-          allMdx(sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {published: {eq: true}}}) {
+        }
+        allMdx(
+            sort: {fields: [frontmatter___date], order: DESC},
+            filter: {frontmatter: {published: {eq: true}}}
+        ){
             nodes {
-              id
-              excerpt(pruneLength: 250)
-              frontmatter {
-                title
-                date
-              }
-              fields {
-                slug
-              }
+                id
+                excerpt(pruneLength: 250)
+                frontmatter {
+                    title
+                    date
+                }
+                fields {
+                    slug
+                }
             }
-          }
+        }
     }
 `
 ```
@@ -497,9 +498,9 @@ const HomePage = ({ data }) => {
             <div>
                 {data.allMdx.nodes.map(({ excerpt, frontmatter, fields }) => (
                     <div>
-                    <Link to={fields.slug}>
-                        <h1>{frontmatter.title}</h1>
-                    </Link>
+                        <Link to={fields.slug}>
+                            <h1>{frontmatter.title}</h1>
+                        </Link>
                         <p>{frontmatter.date}</p>
                         <p>{excerpt}</p>
                     </div>
@@ -532,7 +533,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                     node {
                         id
                         fields {
-                        slug
+                            slug
                         }
                     }
                 }
@@ -565,7 +566,7 @@ You can also pass through the slug and use that to pull posts from the API inste
 context: { slug: post.fields.slug, },
 ```
 
-The last step to making these posts real pages it the template that will be filled with the post information. Create `src/components/post-page-template.js`, or whatever you set in the For-Each loop of the page creation function, and open it. Paste in this code:
+The last step to making these posts real pages is the template that will be filled with the post information. Create `src/components/post-page-template.js`, or whatever you set in the For-Each loop of the page creation function, and open it. Paste in this code:
 
 ```jsx
 import { graphql } from 'gatsby'
@@ -650,4 +651,4 @@ Gatsby also offers their own hosting option called [Gatsby Cloud](https://www.ga
 
 Some ideas are adding Prev/Next navigation to the posts, displaying code blocks with synax highlighting, giving your posts cover photos, or creating an SEO component to attach to all your pages.
 
-## **This article and the codefiles for it can be found [in this Github repo](https://github.com/Cmohan/basic-gatsby-md-blog).**
+### **This article and the code files for it can be found [in this Github repo](https://github.com/Cmohan/basic-gatsby-md-blog).**
