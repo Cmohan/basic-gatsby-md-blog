@@ -4,7 +4,18 @@ If you aren't familiar with it (I hadn't heard of it before 2020), [Gatsby](http
 
 NOTE: This tutorial requires NodeJS and npm. I'm using Powershell 7 as my command prompt but use whatever you feel comfortable with.
 
-# Getting Started
+# Table of Contents
+
+1. [Getting Started](#getting-started)
+2. [Creating Posts](#creating-posts)
+3. [Installing & Configuring Plugins](#install-config-plugins)
+4. [Internal GraphQL API](#internal-graphql-api)
+5. [Displaying Posts List](#displaying-post-list)
+6. [Creating Links to Posts](#creating-links)
+7. [Creating Post Pages](#creating-posts)
+8. [Next Steps](#next-steps)
+
+# <a id="getting-started">Getting Started</a>
 
 If you haven't worked with Gatsby before, you'll need to install the Gatsby CLI first.
 
@@ -38,7 +49,7 @@ You'll also see another URL that ends with "graphql". This URL is a GraphQL API 
 
 The development server auto-refreshes whenever you save changes to any of the pages so you don't need to stop and start it that often. For now, stop the development server with CTRL + C.
 
-# Creating Posts
+# <a id="creating-posts">Creating Posts</a>
 
 With our basic site created, we're going to setup the folder for our posts and create some sample posts. From the root folder of the project, create three post folders and the Markdown document for each post. Here is the Powershell code I used to do that.
 
@@ -113,7 +124,7 @@ This is my third post!
 
 At the top of each post, between the dashes, is metatdata called `frontmatter` that we can access with the GraphQL API. Right now we just have the title, date, and a published value, but you can put other data in there that you need.
 
-# Installing & Configuring Plugins
+# <a id="install-config-plugins">Installing & Configuring Plugins</a>
 
 Now that we have posts, we need a way to display them!
 
@@ -154,7 +165,7 @@ module.exports = {
 }
 ```
 
-# Internal GraphQL API
+# <a id="internal-graphql-api">Internal GraphQL API</a>
 
 The plugins we installed added information to the API that we can now pull with queries to the API. Remember that [http://localhost:8000/___graphql](http://localhost:8000/___graphql) URL we saw when we started up the development server? The development server provides an explorer tool to view the available information in the API and build queries.
 
@@ -312,7 +323,7 @@ export default About
 
 Per the [Gatsby documentation](https://www.gatsbyjs.com/docs/use-static-query/) on this method, you can only use one `useStaticQuery` hook per page currently due to how Gatsby handles the queries, but each hook can be used multiple times throughout the site.
 
-# Displaying Posts List
+# <a id="displaying-posts-list">Displaying Posts List</a>
 
 Using these methods to get data from our site and pages, we can programatically pull all the posts and display links to them in a list on our homepage.
 
@@ -381,7 +392,7 @@ We also updated the page's html code to display the list of posts. If you aren't
 
 ![Homepage with list of posts](/screenshots/11.png)
 
-# Creating Links to Posts
+# <a id="creating-links">Creating Links to Posts</a>
 
 Gatsby has a handy tool called Node API that can help make the URLs for the post pages if we don't want to specify them in the metadata of the posts. These URLs are called slugs and once they're created, we can pull them with an API query to create links on the homepage. This tool will be run through a file called `gatsby-node.js`. It's not included in the Hello World template so you'll need to create it in the root folder of the project, like our `gatsby-config.js` file
 
@@ -513,7 +524,7 @@ const HomePage = ({ data }) => {
 
 ![Homepage with List of Linked Posts - Title Link](/screenshots/15.png)
 
-# Creating Post Pages
+# <a id="creating-posts">Creating Post Pages</a>
 
 Great, you say, we have links but they don't actually go anywhere other than a 404 error page.  How do I make those pages out of the Markdown files? Again, the Node API can help us by making pages to go with those URLs using the `.createPages()` function.
 
@@ -633,7 +644,7 @@ Save this file and then restart the development server. You should now be able t
 
 ## **Congratulations! You made a blog using Gatsby and Markdown posts!**
 
-# Next Steps
+# <a id="next-steps">Next Steps</a>
 
 ## Styling
 
